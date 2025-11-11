@@ -28,8 +28,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.ALPHD }}
-        run: mvn -B verify sonar:sonar \
-          -Dsonar.projectKey=ad270306_rest-service \
-          -Dsonar.organization=ad270306 \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=${{ secrets.ALPHD }}
+        run: |
+          mvn -B verify sonar:sonar \
+            -Dsonar.projectKey=ad270306_rest-service \
+            -Dsonar.organization=ad270306 \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=${{ secrets.ALPHD }}
