@@ -30,6 +30,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.ALPHA_TOKEN }}
         run: |
           mvn -B verify sonar:sonar \
-            -Dsonar.projectKey=Ad270306_rest-service \
-            -Dsonar.organization=Ad270306 \
+            -Dsonar.projectKey=ad270306_rest-service \
+            -Dsonar.organization=ad270306 \
             -Dsonar.host.url=https://sonarcloud.io
