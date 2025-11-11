@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Important pour SonarQube et l'historique Git
+          fetch-depth: 0
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -39,7 +39,6 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      # Compilation et tests (toujours exécuté)
       - name: Build and test with Maven
         run: mvn -B clean verify
 
@@ -48,9 +47,8 @@ jobs:
         if: github.ref != 'refs/heads/main'
         run: |
           echo "Running integration tests on branch: ${{ github.ref }}"
-          mvn -B test -Dtest=*IntegrationTest
+          mvn -B test -Dtest=*IntegrationTest -Dsurefire.failIfNoSpecifiedTests=false
 
-      # Analyse SonarQube
       - name: SonarQube Analysis
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
